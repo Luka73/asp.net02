@@ -4,6 +4,8 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.Web.Routing;
+using AutoMapper;
+using Projeto.Presentation.Mappings;
 
 namespace Projeto.Presentation
 {
@@ -13,6 +15,8 @@ namespace Projeto.Presentation
         {
             AreaRegistration.RegisterAllAreas();
             RouteConfig.RegisterRoutes(RouteTable.Routes);
+
+            Mapper.Initialize(cfg => { cfg.AddProfile<AutoMapperConfig>(); });
         }
     }
 }

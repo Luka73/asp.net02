@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using Projeto.Presentation.Models;
 using Projeto.Entities;
 using Projeto.Business;
+using AutoMapper;
 
 namespace Projeto.Presentation.Controllers
 {
@@ -19,7 +20,19 @@ namespace Projeto.Presentation.Controllers
 
         public ActionResult Consulta()
         {
-            return View();
+            List<EstoqueConsultaViewModel> model = new List<EstoqueConsultaViewModel>();
+
+            try
+            {
+                EstoqueBusiness business = new EstoqueBusiness();
+                model = Mapper.Map<List<EstoqueConsultaViewModel>>(business.ObterTodos());
+            }
+            catch (Exception e)
+            {
+                ViewBag.Mensagem = e.Message;
+            }
+
+            return View(model);
         }
 
         public ActionResult Edicao()
@@ -32,8 +45,7 @@ namespace Projeto.Presentation.Controllers
         {
             if(ModelState.IsValid)
             {
-                Estoque estoque = new Estoque();
-                estoque.Nome = model.Nome;
+                Estoque estoque = Mapper.Map<Estoque>(model);
 
                 try
                 {
@@ -41,6 +53,7 @@ namespace Projeto.Presentation.Controllers
                     business.Cadastrar(estoque);
 
                     ViewBag.Mensagem = "Estoque cadastrado com sucesso!";
+                    ModelState.Clear();
                 }
                 catch (Exception e)
                 {

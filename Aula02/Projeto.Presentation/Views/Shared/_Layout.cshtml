@@ -9,9 +9,56 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Curso de ASP.NET MVC</title>
+
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" />
+
+    <style>
+        html, body{
+            height: 100%;
+        }
+        .fill{
+            min-height: 100%;
+        }
+    </style>
 </head>
-<body>
-    <div> 
+<body style="background-color: #ccc;">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Sistema Modelo</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item active">
+                    <a class="nav-link" href="/Home/Index">Página inicial <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Manter Estoques
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/Estoque/Cadastro">Cadastrar Estoques</a>
+                        <a class="dropdown-item" href="/Estoque/Consulta">Consultar Estoques</a>
+                    </div>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Manter Produtos
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/Produto/Cadastro">Cadastrar Produtos</a>
+                        <a class="dropdown-item" href="/Produto/Consulta">Consultar Produtos</a>
+                    </div>
+                </li>
+            </ul>
+            <div class="text-white">
+                <strong>Bem vindo! </strong> @DateTime.Now.ToString("dddd, dd 'de' MMMM 'de' yyyy")
+            </div>
+        </div>
+    </nav>
+
+    <div class="container fill" style="background-color: #fff; padding: 30px;">
         <h2>Sistema de Controle de Produtos</h2>
         Aula de ASP.NET MVC - Turma de Sábado
         <br />
