@@ -35,9 +35,23 @@ namespace Projeto.Presentation.Controllers
             return View(model);
         }
 
-        public ActionResult Edicao()
+        public ActionResult Edicao(int id)
         {
-            return View();
+            EstoqueEdicaoViewModel model = new EstoqueEdicaoViewModel();
+
+            try
+            {
+                EstoqueBusiness business = new EstoqueBusiness();
+                Estoque estoque = business.ObterPorId(id);
+
+                model = Mapper.Map<EstoqueEdicaoViewModel>(estoque);
+            }
+            catch (Exception e)
+            {
+                ViewBag.Mensagem = "Ocorreu um erro: " + e.Message;
+            }
+
+            return View(model);
         }
 
         [HttpPost]
@@ -62,6 +76,28 @@ namespace Projeto.Presentation.Controllers
             }
 
             return View("Cadastro");
+        }
+
+        [HttpPost]
+        public ActionResult AtualizarEstoque(EstoqueEdicaoViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                try
+                {
+                    Estoque estoque = Mapper.Map<Estoque>(model);
+
+                    EstoqueBusiness business = new EstoqueBusiness();
+                    business.Atualizar(estoque);
+
+                    ViewBag.Mensagem = "Estoque atualizando com sucesso!";
+                }
+                catch (Exception e)
+                {
+                    ViewBag.Mensagem = "Ocorreu um erro: " + e.Message;
+                }
+            }
+            return View("Edicao");
         }
     }
 }

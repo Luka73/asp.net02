@@ -15,6 +15,10 @@ namespace Projeto.Presentation.Mappings
             CreateMap<EstoqueCadastroViewModel, Estoque>();
 
             CreateMap<Estoque, EstoqueConsultaViewModel>();
+
+            CreateMap<Estoque, EstoqueEdicaoViewModel>();
+
+            CreateMap<EstoqueEdicaoViewModel, Estoque>();
         }
     }
 }

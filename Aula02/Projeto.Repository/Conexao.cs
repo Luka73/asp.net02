@@ -13,8 +13,7 @@ namespace Projeto.Repository
         public SqlConnection Connection { get; set; }
         public SqlCommand Command { get; set; }
         public SqlDataReader DataReader { get; set; }
-        //public SqlDataAdapter DataAdapter { get; }
-
+        
         public void AbrirConexao()
         {
             Connection = new SqlConnection(ConfigurationManager.ConnectionStrings["aula02"].ConnectionString);

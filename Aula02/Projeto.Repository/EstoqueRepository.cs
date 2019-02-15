@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Projeto.Entities;
 using System.Data.SqlClient;
+using System.Data;
 
 namespace Projeto.Repository
 {
@@ -42,6 +43,20 @@ namespace Projeto.Repository
         {
             string query = "select * from Estoque";
 
+            SqlDataAdapter sqlAdp = new SqlDataAdapter(query, Connection);
+            DataSet dataSet = new DataSet();
+            sqlAdp.Fill(dataSet);
+
+            var list = dataSet.Tables[0].AsEnumerable().Select(r => new Estoque()
+            {
+                IdEstoque = (int)r["IdEstoque"],
+                Nome = (string)r["Nome"]
+            }
+            ).Where( w => w.IdEstoque > 1 ).ToList();
+
+            return list;
+
+            /*
              Command = new SqlCommand(query, Connection);
              DataReader = Command.ExecuteReader();
 
@@ -57,6 +72,8 @@ namespace Projeto.Repository
              }
 
             return lista;
+
+            */
         }
 
         public Estoque ObterPorId(int idEstoque)
